@@ -4,7 +4,7 @@ local M = {}
 
 local function populate_target_formatters(filetype)
   local g_fmts = neoconf.get('ls-selector._.formatters', {})
-  l_fmts = filetype
+  local l_fmts = filetype
       and neoconf.get(
         string.format('ls-selector.%s.formatters', filetype),
         {}
