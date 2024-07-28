@@ -1,16 +1,12 @@
-local neoconf = require 'neoconf'
+local nc = require'nvim-conf'
 
 local M = {}
 
 local function populate_target_formatters(filetype)
-  local g_fmts = neoconf.get('ls-selector._.formatters', {})
-  local l_fmts = filetype
-      and neoconf.get(
-        string.format('ls-selector.%s.formatters', filetype),
-        {}
-      )
-    or {}
-  return vim.tbl_deep_extend('force', g_fmts, l_fmts) or {}
+  local ctx = nc.Context.new()
+  ctx.filetype = filetype
+
+  return require'nvim-conf'.get(ctx).ls_selector.formatters
 end
 
 function M.format(opts)
